@@ -1,0 +1,16 @@
+name: fastapi-playground
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - fastapi
+  - uvicorn[standard]
+  - requests
+  - pip
+  # build and test
+  - pytest
+  - pytest-mock
+  - pylint
+  - mypy
+  - pyyaml
