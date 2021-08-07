@@ -61,10 +61,11 @@ repos:
   - repo: local
     hooks:
       - id: mypy
-        name: Check Types
-        entry: mypy
+        name: mypy
+        entry: dmypy
         files: \.py$
         language: python
+        args: ["run", "--", "--strict", "--implicit-reexport", "--warn-unused-ignores", "--cache-fine-grained"]
 
       - id: pylint
         name: Pylint

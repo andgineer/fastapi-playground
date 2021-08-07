@@ -12,7 +12,7 @@ app = FastAPI(
 
 
 @app.post("/user/", response_model=User)
-async def create_user(user: User):
+async def create_user(user: User) -> User:
     return User(firstName=user.first_name, last_name="Smith", age=user.age)
 
 

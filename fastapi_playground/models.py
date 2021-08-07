@@ -2,8 +2,9 @@ from humps.camel import case
 from pydantic import BaseModel
 
 
-def to_camel(string):
-    return case(string)
+def to_camel(string: str) -> str:
+    result: str = case(string)
+    return result
 
 
 class User(BaseModel):
