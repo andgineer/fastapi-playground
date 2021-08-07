@@ -33,6 +33,7 @@ if type conda 2>/dev/null; then
       conda activate ${ENV_NAME}
       echo "..installing dependencies from ${ENV_FILE}.."
       mamba env update --quiet -n ${ENV_NAME} -f ${ENV_FILE}
+      pip install -e .
       conda deactivate  # RE-activate conda env so python will have access to conda installed deps
     fi
 else

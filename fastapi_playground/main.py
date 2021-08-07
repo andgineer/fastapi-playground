@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 
-from models import User
+from fastapi_playground.models import User
 
 __version__ = "1.1"
 
