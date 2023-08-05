@@ -1,19 +1,20 @@
 # fastapi-playground
-For quick expreriments with FastAPI and Pydantic
+For quick experiments with FastAPI, SQLModel and Pydantic
 
 ## Local FastAPI
     . ./activate.sh
     make run
 
-http://localhost:8000
+The Swagger UI will be on http://localhost:8000
 
-also it started as service fastapi of docker-compose
+Also it started as service fastapi of docker-compose - see below.
 
-## SQLModel
-Service sqlmodel of docker-compose
-
+## docker-compose
     docker-compose up -d --build
 
+SQLModel application runs as service `sqlmodel` on port 8004, FastAPI application runs as service `fastapi` on port 8000.
+
+## SQLModel
 http://localhost:8004/ping should return {"ping":"pong!"}
 
 The application needs DB so easier to use docker-compose
