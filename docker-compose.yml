@@ -8,10 +8,12 @@ services:
     command: uvicorn fastapi_playground.sqlmodel.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
     volumes:
       - ./fastapi_playground:/usr/src/app/fastapi_playground
+      - ./migrations:/usr/src/app/migrations
+      - ./alembic.ini:/usr/src/app/alembic.ini
     ports:
       - 8004:8000
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/foo
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/foo
     depends_on:
       - db
       - fastapi  # just need Docker image `uvicorn` to be build but in docker-compose it is not possible to build image without running container
@@ -24,10 +26,6 @@ services:
       - ./fastapi_playground:/usr/src/app/fastapi_playground
     ports:
       - 8000:8000
-    environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/foo
-    depends_on:
-      - db
 
   db:
     image: postgres:15.3
@@ -37,3 +35,5 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=foo
+    ports:
+      - 5432:5432

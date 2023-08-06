@@ -11,6 +11,7 @@ class User(UserBase, table=True):
 
     first_name: str
     last_name: str
+    middle_name: str
     age: int
 
 

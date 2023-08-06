@@ -1,5 +1,6 @@
 fastapi==0.100.0
 uvicorn==0.22.0
-psycopg2-binary==2.9.6
+asyncpg==0.28.0
 sqlmodel==0.0.4
 humps==0.2.2
+alembic==1.11.1

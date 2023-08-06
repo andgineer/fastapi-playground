@@ -7,7 +7,7 @@ dependencies:
   - fastapi
   - uvicorn[standard]
   - requests
-  - psycopg2
+  - asyncpg
   - sqlmodel
   - humps
   - pip
