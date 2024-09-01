@@ -11,9 +11,9 @@ app = FastAPI(
 )
 
 
-@app.post("/user/", response_model=User)
+@app.post("/users/", response_model=User)
 async def create_user(user: User) -> User:
-    return User(firstName=user.first_name, last_name="Smith", age=user.age)
+    return User(firstName=user.first_name, lastName=user.last_name, age=user.age)
 
 
 if __name__ == "__main__":

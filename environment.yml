@@ -3,13 +3,12 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.11
   - fastapi
   - uvicorn[standard]
   - requests
   - asyncpg
   - sqlmodel
-  - humps
+  - pyhumps
   - pip
   # build and test
   - pytest
