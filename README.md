@@ -1,50 +1,57 @@
-# fastapi-playground
-For quick experiments with FastAPI, SQLModel and Pydantic
+# FastAPI Playground
+A sandbox environment for experimenting with FastAPI, SQLModel, 
+and Pydantic. 
 
-## Local FastAPI
+Perfect for testing ideas, prototyping features, and learning the stack.
+
+## 🚀 Quick Start
+### Local Development
     . ./activate.sh
     make run
 
-The Swagger UI will be on http://localhost:8000
+Access the Swagger UI at http://localhost:8000
 
-Also it started as service fastapi of docker-compose - see below.
-
-## docker-compose
+### Docker Setup
     docker-compose up -d --build
-    docker-compose exec sqlmodel alembic upgrade head  # create tables
+    docker-compose exec sqlmodel alembic upgrade head  # Initialize database tables
 
-SQLModel application runs as service `sqlmodel` on port 8004, FastAPI application runs as service `fastapi` on port 8000.
+#### 🏗️ Docker Compose Services
+- **SQLModel Service**: Runs on port 8004
+- **FastAPI Service**: Runs on port 8000
 
-## SQLModel
+Test the SQLModel Service health with:
 
-### Sanity check
-http://localhost:8004/ping should return {"ping":"pong!"}
+    curl http://localhost:8004/ping
 
-### Local run
-The application needs DB so easier to use docker-compose
-Alternative you can run just DB with docker-compose and provide to the application correct
-`DATABASE_URL` but that looks like overkill.
+Expected response: {"ping":"pong!"}
 
-### psql
+## 💾 Database Setup
 
+### PostgreSQL Client Installation
+# macOS
     brew doctor
     brew update
     brew install libpq
     echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> ~/.zshrc
 
+# Configure PostgreSQL password file
     cp .pgpass ~/.pgpass
     chmod 600 ~/.pgpass
 
+### Database Management
+# Connect to PostgreSQL
     scripts/psql.sh
+
+# View User table structure
     \d+ User
 
-### Alembic
+## 🔄 Database Migrations (Alembic)
 
-#### Log
+### Common Commands
+# View migration history
     docker-compose exec sqlmodel alembic history -v
 
-#### Generate migrations based on current SQLModel models
+# Generate new migration
     docker-compose exec sqlmodel alembic revision --autogenerate -m "description"
 
-    
 
