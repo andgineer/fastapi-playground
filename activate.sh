@@ -34,7 +34,7 @@ if conda info --envs | grep "\b${ENV_NAME}\s"; then
 else
   if [[ -z $(conda list --name base | grep "^mamba ") ]]; then
     echo -e $CYAN"..installing mamba.."$NC
-    conda install mamba --name base --channel conda-forge --yes
+    conda install mamba>=2.0.5 --name base --channel conda-forge --yes
   fi
   echo -e $CYAN"..creating environment ${ENV_NAME} with ${PRIMARY_PYTHON_VERSION}.."$NC
   conda create -y -n ${ENV_NAME} python="${PRIMARY_PYTHON_VERSION}"
