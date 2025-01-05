@@ -3,7 +3,7 @@
 .HELP: help  ## Upgrade dependencies
 reqs:
 	mamba update --all
-	mamba env export > environment.yml
+	mamba env export > environment.yml.tmp && grep -v 'prefix:' environment.yml.tmp > environment.yml && rm environment.yml.tmp
 
 .HELP: help  ## Run the server
 run:
