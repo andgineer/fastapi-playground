@@ -1,6 +1,6 @@
 # FastAPI Playground
-A sandbox environment for experimenting with FastAPI, SQLModel, 
-and Pydantic. 
+A sandbox environment for experimenting with FastAPI, SQLModel,
+and Pydantic.
 
 Perfect for testing ideas, prototyping features, and learning the stack.
 
@@ -53,5 +53,3 @@ Expected response: {"ping":"pong!"}
 
 # Generate new migration
     docker-compose exec sqlmodel alembic revision --autogenerate -m "description"
-
-
