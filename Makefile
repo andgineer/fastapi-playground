@@ -14,6 +14,15 @@ run:
 	fastapi_playground.main:app \
 	--log-config logging.yaml
 
+.HELP: help  ## Run sql model
+sqlmodel:
+	DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/foo python -m uvicorn \
+	--host 0.0.0.0 \
+	--port 8000 \
+	--reload \
+	fastapi_playground.sqlmodel.main:app \
+	--log-config logging.yaml
+
 .HELP: help  ## Display this message
 help:
 	@grep -E \

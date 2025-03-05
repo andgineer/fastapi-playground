@@ -1,9 +1,9 @@
-from fastapi import FastAPI, Depends
-
-from fastapi_playground.sqlmodel.db import init_db, get_session
+from fastapi import Depends, FastAPI
 from sqlalchemy import select
-from fastapi_playground.sqlmodel.models import User, UserCreate  # this import creates the table
 from sqlmodel.ext.asyncio.session import AsyncSession
+
+from fastapi_playground.sqlmodel.db import get_session, init_db
+from fastapi_playground.sqlmodel.models import User, UserCreate  # this import creates the table
 
 app = FastAPI()
 
@@ -18,16 +18,32 @@ async def pong():
     return {"ping": "pong!"}
 
 
-@app.get("/users", response_model=list[User])
-async def get_songs(session: AsyncSession = Depends(get_session)):
+get_session_dependency = Depends(get_session)
+
+
+@app.get("/songs", response_model=list[User])
+async def get_songs(session: AsyncSession = get_session_dependency):
     result = await session.execute(select(User))
     users = result.scalars().all()
-    return [User(first_name=user.first_name, last_name=user.last_name, middle_name=user.middle_name, age=user.age) for user in users]
+    return [
+        User(
+            first_name=user.first_name,
+            last_name=user.last_name,
+            middle_name=user.middle_name,
+            age=user.age,
+        )
+        for user in users
+    ]
 
 
-@app.post("/users")
-async def add_song(user: UserCreate, session: AsyncSession = Depends(get_session)):
-    user = User(first_name=user.first_name, last_name=user.last_name, age=user.age, middle_name=user.middle_name)
+@app.post("/songs")
+async def add_song(user: UserCreate, session: AsyncSession = get_session_dependency):
+    user = User(  # type: ignore
+        first_name=user.first_name,
+        last_name=user.last_name,
+        age=user.age,
+        middle_name=user.middle_name,
+    )
     session.add(user)
     await session.commit()
     await session.refresh(user)

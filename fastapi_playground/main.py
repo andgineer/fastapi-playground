@@ -5,6 +5,7 @@ from fastapi_playground.models import User
 
 __version__ = "1.1"
 
+
 app = FastAPI(
     docs_url="/",
     version=__version__,
@@ -13,7 +14,7 @@ app = FastAPI(
 
 @app.post("/users/", response_model=User)
 async def create_user(user: User) -> User:
-    return User(firstName=user.first_name, lastName=user.last_name, age=user.age)
+    return User(first_name=user.first_name, last_name=user.last_name, age=user.age)
 
 
 if __name__ == "__main__":

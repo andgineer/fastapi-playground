@@ -1,4 +1,3 @@
-version: '3.8'
 # based on https://github.com/testdrivenio/fastapi-sqlmodel-alembic
 
 services:
