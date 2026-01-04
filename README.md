@@ -3,18 +3,21 @@ A sandbox environment for experimenting with FastAPI, SQLModel, and Pydantic.
 
 Perfect for testing ideas, prototyping features, and learning the stack.
 
-## 🚀 Quick Start
+## Quick Start
 ### Local Development
     . ./activate.sh
+
+    # FastAPI: Swagger UI at http://localhost:8000
     make run
 
-Access the Swagger UI at http://localhost:8000
+    # SQLMoldel: Swagger UI at http://localhost:8000/docs
+    make sqlmodel
 
 ### Docker Setup
     docker-compose up -d --build
     docker-compose exec sqlmodel alembic upgrade head  # Initialize database tables
 
-#### 🏗️ Docker Compose Services
+#### Docker Compose Services
 - **SQLModel Service**: Runs on port 8004
 - **FastAPI Service**: Runs on port 8000
 
@@ -24,7 +27,7 @@ Test the SQLModel Service health with:
 
 Expected response: {"ping":"pong!"}
 
-## 💾 Database Setup
+## Database Setup
 
 ### PostgreSQL Client Installation
 **macOS:**

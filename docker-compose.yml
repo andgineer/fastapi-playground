@@ -2,6 +2,15 @@
 
 services:
 
+  fastapi:
+    build: ./docker/sqlmodel
+    image: uvicorn
+    command: uvicorn fastapi_playground.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    volumes:
+      - ./fastapi_playground:/usr/src/app/fastapi_playground
+    ports:
+      - 8000:8000
+
   sqlmodel:
     image: uvicorn
     command: uvicorn fastapi_playground.sqlmodel.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
@@ -16,15 +25,6 @@ services:
     depends_on:
       - db
       - fastapi  # just need Docker image `uvicorn` to be build but in docker-compose it is not possible to build image without running container
-
-  fastapi:
-    build: ./docker/sqlmodel
-    image: uvicorn
-    command: uvicorn fastapi_playground.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
-    volumes:
-      - ./fastapi_playground:/usr/src/app/fastapi_playground
-    ports:
-      - 8000:8000
 
   db:
     image: postgres:15.3
