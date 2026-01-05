@@ -34,10 +34,10 @@ jobs:
           use-only-tar-bz2: true
 
       - name: Install dependencies
-      - run: |
+        run: |
           conda install mamba>=2.0.5 --name base --channel conda-forge --yes
-          mamba env update --quiet -n ${{ env.ENV_NAME }} -f ${{ ENV_FILE }}
+          mamba env update --quiet -n ${{ env.ENV_NAME }} -f ${{ env.ENV_FILE }}
           pip install -e .
 
       - name: Static check
-      - run: pre-commit run --verbose --all-files
+        run: pre-commit run --verbose --all-files
