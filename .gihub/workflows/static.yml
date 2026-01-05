@@ -1,0 +1,43 @@
+
+# build docs from docstrings and markdown-file in folder docs
+# publish them as github pages
+#
+#note for myself
+#
+# Do not forget to set git branch `gh-pages` as source for github pages.
+# This branch auto-updated by `mkdocs gh-deploy`
+#
+name: static source code checks
+on:
+  push:
+    branches:
+      - main
+      - master
+jobs:
+  static:
+    env:
+      PRIMARY_PYTHON_VERSION: '3.12'
+      ENV_NAME: 'fastapi-playground'
+      ENV_FILE: 'environment.yml'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: ${{ env.ENV_NAME }}
+          python-version: ${{ env.PRIMARY_PYTHON_VERSION }}
+          auto-update-conda: true
+          channels: conda-forge,defaults
+          use-only-tar-bz2: true
+
+      - name: Install dependencies
+      - run: |
+          conda install mamba>=2.0.5 --name base --channel conda-forge --yes
+          mamba env update --quiet -n ${{ env.ENV_NAME }} -f ${{ ENV_FILE }}
+          pip install -e .
+
+      - name: Static check
+      - run: pre-commit run --verbose --all-files
