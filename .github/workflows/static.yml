@@ -35,7 +35,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          conda install "mamba>=2.4.0" --name base --channel conda-forge --yes
+          conda install "mamba>=2.0.5" --name base --channel conda-forge --yes
           mamba env update --quiet -n ${{ env.ENV_NAME }} -f ${{ env.ENV_FILE }}
           pip install -e .
 
