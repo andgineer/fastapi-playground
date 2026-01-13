@@ -40,6 +40,7 @@ jobs:
       - name: Install dependencies
         run: |
           mamba env update --quiet -n ${{ env.ENV_NAME }} -f ${{ env.ENV_FILE }}
+          mamba install pre-commit
           pip install -e .
 
       - name: Static check
